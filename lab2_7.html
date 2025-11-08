@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+        form{
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h3></h3>
+    <form enctype="multipart/form-data">
+        <fieldset>
+            <legend>Profile Picture</legend>
+
+            <label for="userid">User ID</label>
+            <input type="text" id="userid" name="userid" required><br><br>
+
+            <label for="picture">Picture</label>
+            <input type="file" id="picture" name="picture" accept="image/*" required>
+        <hr>
+        <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+</body>
+</html>

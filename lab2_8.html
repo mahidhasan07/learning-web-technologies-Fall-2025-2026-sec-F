@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="#" method="post" enctype="multipart/form-data">
+    <table border="1" width="500px" align="center">
+        <table border="1" width="500px" align="center">
+        <tr>
+            <th colspan="3"><h3>PERSON PROFILE</h3></th>
+         </tr>
+        <tr >
+            <td>Name</td>
+            <td>
+                <label for="name"></label>
+                <input type="text" id="name" name="name" required>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td>
+                <label for="email"></label>
+                <input type="email" id="email" name="email" placeholder="sample@example.com" required>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>
+                <legend></legend>
+                <label><input type="radio" name="gender" value="male" required>Male</label>
+                <label><input type="radio" name="gender" value="Female" required>Female</label>
+                <label><input type="radio" name="gender" value="other" required>Other</label>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Date of Birth</td>
+        <td>
+          <input type="number" name="day" placeholder="dd" min="1" max="31" style="width:45px;" required> /
+          <input type="number" name="month" placeholder="mm" min="1" max="12" style="width:45px;" required> /
+          <input type="number" name="year" placeholder="yyyy" min="1900" max="2025" style="width:60px;" required>
+          <small>(dd/mm/yyyy)</small>
+        </td>
+      </tr>
+      <tr>
+        <tr>
+            <td>Blood Group</td>
+            <td>
+                <label for="blood"></label>
+            <select id="blood" name="blood" required>
+            <option value="">--select--</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            </select>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Degree</td>
+            <td>
+                <legend></legend>
+                <label><input type="checkbox" name="degree" value="SSC">SSC</label>
+                 <label><input type="checkbox" name="degree" value="HSC">HSC</label>
+                <label><input type="checkbox" name="degree" value="Bsc">Bsc</label>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Photo</td>
+            <td>
+                <legend></legend>
+                <label for="picture"></label>
+                <input type="file" id="picture" name="picture" accept="image/*" required>
+            </td>
+            <td></td>
+        </tr>
+
+    </table>
+    </form>
+</body>
+</html>
