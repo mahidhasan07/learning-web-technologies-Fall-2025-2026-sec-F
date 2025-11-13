@@ -1,0 +1,104 @@
+<html>
+<head><title>Person Profile</title></head>
+<body>
+<h1>PERSON PROFILE</h1>
+<form onsubmit="return validateAll()">
+<table border="1" cellpadding="5">
+  <tr><td>Name</td><td><input type="text" id="name"></td></tr>
+  <tr><td>Email</td><td><input type="text" id="email"></td></tr>
+  <tr><td>Gender</td>
+      <td>
+        <input type="radio" name="gender" id="male">Male
+        <input type="radio" name="gender" id="female">Female
+        <input type="radio" name="gender" id="other">Other
+      </td></tr>
+  <tr><td>Date of Birth</td>
+      <td>
+        <input type="text" id="dd" size="2"> /
+        <input type="text" id="mm" size="2"> /
+        <input type="text" id="yyyy" size="4"> (dd/mm/yyyy)
+      </td></tr>
+  <tr><td>Blood Group</td>
+      <td>
+        <select id="blood">
+          <option value="">Select</option>
+          <option>A+</option><option>A-</option>
+          <option>B+</option><option>B-</option>
+          <option>O+</option><option>O-</option>
+          <option>AB+</option><option>AB-</option>
+        </select>
+      </td></tr>
+  <tr><td>Degree</td>
+      <td>
+        <input type="checkbox" id="ssc">SSC
+        <input type="checkbox" id="hsc">HSC
+        <input type="checkbox" id="bsc">BSc
+        <input type="checkbox" id="msc">MSc
+      </td></tr>
+  <tr><td>Photo</td><td><input type="file" id="photo"></td></tr>
+  <tr><td colspan="2" align="center">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+  </td></tr>
+</table>
+<p id="allError"></p>
+</form>
+
+<script>
+let allError = document.getElementById('allError');
+
+function validateAll(){
+  let name = document.getElementById('name').value.trim();
+  let email = document.getElementById('email').value.trim();
+  let male = document.getElementById('male').checked;
+  let female = document.getElementById('female').checked;
+  let other = document.getElementById('other').checked;
+  let dd = document.getElementById('dd').value;
+  let mm = document.getElementById('mm').value;
+  let yyyy = document.getElementById('yyyy').value;
+  let blood = document.getElementById('blood').value;
+  let ssc = document.getElementById('ssc').checked;
+  let hsc = document.getElementById('hsc').checked;
+  let bsc = document.getElementById('bsc').checked;
+  let msc = document.getElementById('msc').checked;
+  let photo = document.getElementById('photo').value;
+
+  if(name == "" || email == ""){
+    allError.innerHTML = "Name and Email cannot be empty!";
+    allError.style.color = 'red';
+    return false;
+  }
+  if(!male && !female && !other){
+    allError.innerHTML = "Please select Gender!";
+    allError.style.color = 'red';
+    return false;
+  }
+  if(dd == "" || mm == "" || yyyy == "" || isNaN(dd) || isNaN(mm) || isNaN(yyyy)
+     || Number(dd)<1 || Number(dd)>31 || Number(mm)<1 || Number(mm)>12 || Number(yyyy)<1900 || Number(yyyy)>2016){
+    allError.innerHTML = "Invalid Date of Birth!";
+    allError.style.color = 'red';
+    return false;
+  }
+  if(blood == ""){
+    allError.innerHTML = "Please select Blood Group!";
+    allError.style.color = 'red';
+    return false;
+  }
+  if(!ssc && !hsc && !bsc && !msc){
+    allError.innerHTML = "Please select at least one Degree!";
+    allError.style.color = 'red';
+    return false;
+  }
+  if(photo == ""){
+    allError.innerHTML = "Please upload a Photo!";
+    allError.style.color = 'red';
+    return false;
+  }
+
+  allError.innerHTML = "";
+  alert("Form submitted successfully!");
+  return true;
+}
+</script>
+</body>
+</html>

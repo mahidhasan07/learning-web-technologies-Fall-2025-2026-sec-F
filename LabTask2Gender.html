@@ -1,0 +1,35 @@
+<html>
+<head><title>Gender Validation</title></head>
+<body>
+<h2>Gender</h2>
+<div style="border:1px solid black; width:200px; padding:10px;">
+<form onsubmit="return testGender()">
+  <input type="radio" name="gender" id="male" value="Male"> Male
+  <input type="radio" name="gender" id="female" value="Female"> Female
+  <input type="radio" name="gender" id="other" value="Other"> Other
+  <br><br>
+  <input type="submit" value="Submit">
+  <p id="gError"></p>
+</form>
+</div>
+
+<script>
+let gError = document.getElementById('gError');
+
+function testGender(){
+  let male = document.getElementById('male').checked;
+  let female = document.getElementById('female').checked;
+  let other = document.getElementById('other').checked;
+
+  if(!male && !female && !other){
+    gError.innerHTML = "Please select a gender!";
+    gError.style.color = 'red';
+    return false;
+  } else {
+    gError.innerHTML = "";
+    return true;
+  }
+}
+</script>
+</body>
+</html>

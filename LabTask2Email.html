@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title>Email Validation</title>
+</head>
+<body>
+  <h2>Email Validation</h2>
+  <form id="emailForm" onsubmit="return validateEmail()">
+    Email: <input type="text" id="email">
+    <p id="emailError"></p>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function validateEmail() {
+      let email = document.getElementById("email").value.trim();
+      let emailError = document.getElementById("emailError");
+
+      // Rule 1: Cannot be empty
+      if (email === "") {
+        emailError.innerHTML = "Email cannot be empty.";
+        emailError.style.color = "red";
+        return false;
+      }
+
+      // Rule 2: Must contain "@" and "."
+      let atPos = email.indexOf("@");
+      let dotPos = email.lastIndexOf(".");
+      
+      if (atPos < 1 || dotPos < atPos + 2 || dotPos >= email.length - 1) {
+        emailError.innerHTML = "Invalid email format (must be like anything@example.com).";
+        emailError.style.color = "red";
+        return false;
+      }
+
+      // Rule 3: Must not have spaces
+      if (email.indexOf(" ") !== -1) {
+        emailError.innerHTML = "Email cannot contain spaces.";
+        emailError.style.color = "red";
+        return false;
+      }
+
+      // Rule 4: Must have characters before and after "@"
+      let localPart = email.substring(0, atPos);
+      let domainPart = email.substring(atPos + 1);
+
+      if (localPart.length < 1 || domainPart.length < 3) {
+        emailError.innerHTML = "Email must have a valid local and domain part.";
+        emailError.style.color = "red";
+        return false;
+      }
+
+      // Passed all rules
+      emailError.innerHTML = "Valid email!";
+      emailError.style.color = "green";
+      return true;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<html>
+<head>
+  <title>Name Validation</title>
+</head>
+<body>
+  <h2>Name Validation</h2>
+  <form id="nameForm" onsubmit="return validateName()">
+    Name: <input type="text" id="name">
+    <p id="nameError"></p>
+    <input type="submit" value="Submit">
+  </form>
+
+  <script>
+    function validateName() {
+      let name = document.getElementById("name").value.trim();
+      let nameError = document.getElementById("nameError");
+
+      // Rule 1: Cannot be empty
+      if (name === "") {
+        nameError.innerHTML = "Name cannot be empty.";
+        nameError.style.color = "red";
+        return false;
+      }
+
+      // Rule 2: At least two words
+      let words = name.split(" ");
+      let validWords = 0;
+      for (let i = 0; i < words.length; i++) {
+        if (words[i].length > 0) {
+          validWords++;
+        }
+      }
+      if (validWords < 2) {
+        nameError.innerHTML = "Name must contain at least two words.";
+        nameError.style.color = "red";
+        return false;
+      }
+
+      // Rule 3: Must start with a letter
+      let firstChar = name.charAt(0);
+      if (!((firstChar >= "A" && firstChar <= "Z") || (firstChar >= "a" && firstChar <= "z"))) {
+        nameError.innerHTML = "Name must start with a letter.";
+        nameError.style.color = "red";
+        return false;
+      }
+
+      // Rule 4: Only letters, dots, or dashes allowed
+      for (let i = 0; i < name.length; i++) {
+        let ch = name.charAt(i);
+        if (
+          !(
+            (ch >= "A" && ch <= "Z") ||
+            (ch >= "a" && ch <= "z") ||
+            ch === "." ||
+            ch === "-" ||
+            ch === " "
+          )
+        ) {
+          nameError.innerHTML = "Only letters, dots, dashes, and spaces are allowed.";
+          nameError.style.color = "red";
+          return false;
+        }
+      }
+
+      // If all rules passed
+      nameError.innerHTML = "Valid name!";
+      nameError.style.color = "green";
+      return true;
+    }
+  </script>
+</body>
+</html>

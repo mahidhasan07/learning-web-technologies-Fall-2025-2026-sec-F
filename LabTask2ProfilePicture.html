@@ -1,0 +1,38 @@
+<html>
+<head><title>Profile Picture Validation</title></head>
+<body>
+<h2>Profile Picture</h2>
+<div style="border:1px solid black; width:250px; padding:10px;">
+<form onsubmit="return testProfile()">
+  User ID: <input type="text" id="uid"><br><br>
+  Picture: <input type="file" id="pic"><hr>>
+  <input type="submit" value="Submit">
+  <p id="pError"></p>
+</form>
+</div>
+
+<script>
+let pError = document.getElementById('pError');
+
+function testProfile(){
+  let uid = document.getElementById('uid').value;
+  let pic = document.getElementById('pic').value;
+
+  if(uid == "" || pic == ""){
+    pError.innerHTML = "User ID and Picture cannot be empty!";
+    pError.style.color = 'red';
+    return false;
+  }
+
+  if(isNaN(uid) || Number(uid) <= 0){
+    pError.innerHTML = "User ID must be a positive number!";
+    pError.style.color = 'red';
+    return false;
+  }
+
+  pError.innerHTML = "";
+  return true;
+}
+</script>
+</body>
+</html>
