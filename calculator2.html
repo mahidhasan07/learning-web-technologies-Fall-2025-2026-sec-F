@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        input {
+            width: 160px;
+            height: 30px;
+            font-size: 18px;
+            margin-bottom: 10px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        button {
+            width: 40px;
+            height: 40px;
+            font-size: 18px;
+            margin: 2px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Calculator</h2>
+
+<input type="text" id="display" readonly><br>
+
+<!-- Row buttons -->
+<button onclick="appendDigit('7')">7</button>
+<button onclick="appendDigit('8')">8</button>
+<button onclick="appendDigit('9')">9</button>
+<button onclick="appendOperator('+')">+</button><br>
+
+<button onclick="appendDigit('4')">4</button>
+<button onclick="appendDigit('5')">5</button>
+<button onclick="appendDigit('6')">6</button>
+<button onclick="appendOperator('-')">-</button><br>
+
+<button onclick="appendDigit('1')">1</button>
+<button onclick="appendDigit('2')">2</button>
+<button onclick="appendDigit('3')">3</button>
+<button onclick="appendOperator('*')">*</button><br>
+
+<button onclick="appendDigit('0')">0</button>
+<button onclick="appendDot()">.</button>
+<button onclick="calculateResult()">=</button>
+<button onclick="appendOperator('/')">/</button><br>
+
+<button onclick="clearAll()">AC</button>
+<button onclick="deleteLast()">C</button>
+
+<script>
+    const display = document.getElementById("display");
+    const ops = ["+", "-", "*", "/"];
+
+    function lastChar() {
+        return display.value.charAt(display.value.length - 1);
+    }
+
+    function appendDigit(d) {
+        if (display.value === "Error") display.value = "";
+        display.value += d;
+    }
+
+    function appendOperator(op) {
+        let v = display.value;
+        let last = lastChar();
+
+        if (v === "") {
+            if (op === "-") display.value = "-"; // allow negative number
+            return;
+        }
+
+        if (ops.indexOf(last) !== -1) {
+            // replace last operator
+            display.value = v.slice(0, v.length - 1) + op;
+        } else {
+            display.value += op;
+        }
+    }
+
+    function appendDot() {
+        let v = display.value;
+
+        // Find last operator index manually (no regex)
+        let lastOpIndex = -1;
+        for (let i = 0; i < ops.length; i++) {
+            let pos = v.lastIndexOf(ops[i]);
+            if (pos > lastOpIndex) lastOpIndex = pos;
+        }
+
+        let currentNumber = v.slice(lastOpIndex + 1);
+
+        // Prevent multiple dots
+        if (currentNumber.indexOf(".") !== -1) return;
+
+        if (currentNumber === "") {
+            display.value += "0.";
+        } else {
+            display.value += ".";
+        }
+    }
+
+    function calculateResult() {
+        let exp = display.value;
+        if (exp === "") return;
+
+        let last = lastChar();
+        if (ops.indexOf(last) !== -1 || last === ".") return;
+
+        try {
+            let ans = Function("return " + exp)();
+            if (Number.isNaN(ans) || ans === Infinity || ans === -Infinity) {
+                display.value = "Error";
+            } else {
+                display.value = ans.toString();
+            }
+        } catch {
+            display.value = "Error";
+        }
+    }
+
+    function clearAll() {
+        display.value = "";
+    }
+
+    function deleteLast() {
+        display.value = display.value.slice(0, display.value.length - 1);
+    }
+</script>
+
+</body>
+</html>
